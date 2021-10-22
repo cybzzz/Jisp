@@ -19,10 +19,12 @@ public class Env extends HashMap<String, Exp> {
         this.outer = outer;
     }
 
-    public Exp find(String key) {
+    public HashMap<Exp, Env> find(String key) {
         var res = this.get(key);
         if (res != null) {
-            return res;
+            HashMap<Exp, Env> map = new HashMap<>();
+            map.put(res, this);
+            return map;
         } else {
             try {
                 return outer.find(key);

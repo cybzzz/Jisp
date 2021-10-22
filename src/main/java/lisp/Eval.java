@@ -10,7 +10,9 @@ public class Eval {
 
     public Exp eval(Exp x, Env env) {
         if (x instanceof MyString) {
-            return env.find(x.toString());
+            for (Exp exp : env.find(x.toString()).keySet()) {
+                return exp;
+            }
         } else if (!(x instanceof MyList)) {
             return x;
         } else {
@@ -42,8 +44,11 @@ public class Eval {
                 case "define":
                     env.put(args.get(0).toString(), eval(args.get(1), env));
                     break;
-                /*case "set!":
-                 */
+                case "set!":
+                    for (Env env1 : env.find(args.get(0).toString()).values()) {
+                        env1.put(args.get(0).toString(), eval(args.get(1), env));
+                    }
+                    break;
                 case "lambda":
                     return new Procedure((MyList) args.get(0), args.get(1), env);
                 default:
