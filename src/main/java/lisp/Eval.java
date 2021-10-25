@@ -1,7 +1,6 @@
 package lisp;
 
 import java.util.ArrayList;
-import java.util.function.Function;
 
 /**
  * @author cyb
@@ -29,18 +28,14 @@ public class Eval {
                     if (args.size() != 3) {
                         throw new RuntimeException("unexpected parameters");
                     }
-                    Function<MyList, Exp> myIf = myList -> {
-                        var test = myList.list.get(1);
-                        var consequence = myList.list.get(2);
-                        var alt = myList.list.get(3);
-                        if (((MyBoolean) eval(test, env)).bool) {
-                            return (Exp) consequence;
-                        } else {
-                            return (Exp) alt;
-                        }
-                    };
-                    var res = myIf.apply((MyList) x);
-                    return eval(res, env);
+                    var test = args.get(0);
+                    var consequence = args.get(1);
+                    var alt = args.get(2);
+                    if (((MyBoolean) eval(test, env)).bool) {
+                        return eval(consequence, env);
+                    } else {
+                        return eval(alt, env);
+                    }
                 case "define":
                     env.put(args.get(0).toString(), eval(args.get(1), env));
                     break;

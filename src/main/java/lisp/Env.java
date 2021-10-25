@@ -8,8 +8,7 @@ import java.util.HashMap;
 public class Env extends HashMap<String, Exp> {
     public Env outer;
 
-    public Env() {
-    }
+    public Env() {}
 
     public Env(MyList params, MyList args, Env outer) {
         this.clear();
@@ -22,7 +21,7 @@ public class Env extends HashMap<String, Exp> {
     public HashMap<Exp, Env> find(String key) {
         var res = this.get(key);
         if (res != null) {
-            HashMap<Exp, Env> map = new HashMap<>();
+            HashMap<Exp, Env> map = new HashMap<>(1);
             map.put(res, this);
             return map;
         } else {

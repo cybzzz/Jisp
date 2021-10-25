@@ -8,8 +8,7 @@ import java.util.ArrayList;
 public final class MyList extends Exp {
     public ArrayList<Exp> list;
 
-    public MyList() {
-    }
+    public MyList() {}
 
     public MyList(ArrayList<Exp> list) {
         this.list = list;

@@ -8,8 +8,7 @@ public final class Procedure extends Exp {
     public Exp body;
     public Env env;
 
-    public Procedure() {
-    }
+    public Procedure() {}
 
     public Procedure(MyList params, Exp body, Env env) {
         this.params = params;

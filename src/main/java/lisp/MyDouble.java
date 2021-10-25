@@ -5,8 +5,7 @@ import java.util.Objects;
 public final class MyDouble extends Atom {
     public Double num;
 
-    public MyDouble() {
-    }
+    public MyDouble() {}
 
     public MyDouble(double num) {
         this.num = num;

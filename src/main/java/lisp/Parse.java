@@ -8,14 +8,8 @@ import java.util.stream.Collectors;
  * @author cyb
  */
 public class Parse {
-    public String input;
 
-    public Parse() {
-    }
-
-    public Parse(String s) {
-        this.input = s;
-    }
+    public Parse() {}
 
     public MyList tokenize(String input) {
         String[] strings = input.replace("(", " ( ").replace(")", " ) ").split(" ");
