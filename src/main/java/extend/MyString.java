@@ -1,11 +1,12 @@
-package lisp;
+package extend;
 
 import java.util.Objects;
 
 public final class MyString extends Atom {
     public String string;
 
-    public MyString() {}
+    public MyString() {
+    }
 
     public MyString(String s) {
         this.string = s;

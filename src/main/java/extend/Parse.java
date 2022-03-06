@@ -1,7 +1,9 @@
-package lisp;
+package extend;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Deque;
 import java.util.stream.Collectors;
 
 /**
@@ -9,32 +11,32 @@ import java.util.stream.Collectors;
  */
 public class Parse {
 
-    public Parse() {}
+    public Parse() {
+    }
 
-    public MyList tokenize(String input) {
+    public Deque<MyString> tokenize(String input) {
         String[] strings = input.replace("(", " ( ").replace(")", " ) ").split(" ");
-        return new MyList(Arrays.stream(strings).filter(s -> !"".equals(s)).map(MyString::new).collect(Collectors.toCollection(ArrayList::new)));
+        return Arrays.stream(strings).filter(s -> !"".equals(s)).map(MyString::new).collect(Collectors.toCollection(ArrayDeque<MyString>::new));
     }
 
     public Exp parse(String input) {
-        return read_from_token(tokenize(input));
+        return readFromToken(tokenize(input));
     }
 
-    public Exp read_from_token(MyList myList) {
-        var tokens = myList.list;
+    public Exp readFromToken(Deque<MyString> tokens) {
         if (tokens.size() == 0) {
             throw new RuntimeException("unexpected EOF");
         }
-        String token = tokens.get(0).toString();
-        tokens.remove(0);
+        String token = tokens.poll().string;
         if ("(".equals(token)) {
-            ArrayList<Exp> L = new ArrayList<>();
-            while (!")".equals(tokens.get(0).toString())) {
-                Exp res = read_from_token(myList);
-                L.add(res);
+            ArrayList<Exp> l = new ArrayList<>();
+            while (!")".equals(tokens.peek().string)) {
+                Exp res = readFromToken(tokens);
+                l.add(res);
             }
-            tokens.remove(0);
-            return new MyList(L);
+            // 删除 ")"
+            tokens.poll();
+            return new MyList(l);
         } else if (")".equals(token)) {
             throw new RuntimeException("unexpected )");
         } else {

@@ -1,14 +1,12 @@
-package lisp;
+package extend;
 
 import java.util.HashMap;
 
-/**
- * @author cyb
- */
 public class Env extends HashMap<String, Exp> {
     public Env outer;
 
-    public Env() {}
+    public Env() {
+    }
 
     public Env(MyList params, MyList args, Env outer) {
         this.clear();
@@ -18,12 +16,10 @@ public class Env extends HashMap<String, Exp> {
         this.outer = outer;
     }
 
-    public HashMap<Exp, Env> find(String key) {
+    public Env find(String key) {
         var res = this.get(key);
         if (res != null) {
-            HashMap<Exp, Env> map = new HashMap<>(1);
-            map.put(res, this);
-            return map;
+            return this;
         } else {
             try {
                 return outer.find(key);

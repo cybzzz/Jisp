@@ -1,11 +1,12 @@
-package lisp;
+package extend;
 
 import java.util.Objects;
 
 public final class MyBoolean extends Exp {
     public Boolean bool;
 
-    public MyBoolean() {}
+    public MyBoolean() {
+    }
 
     public MyBoolean(boolean bool) {
         this.bool = bool;
