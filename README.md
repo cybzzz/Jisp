@@ -16,4 +16,4 @@ Java 实现的 Lisp 解释器
 * Lambda 表达式
 
 ## 示例
-![示例](src/main/resources/Jisp 示例.png)
+![示例](src/main/resources/Jisp示例.png)
